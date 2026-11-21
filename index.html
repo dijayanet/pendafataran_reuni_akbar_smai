@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <link rel="icon" type="image/png" href="logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pendaftaran Reuni Akbar Alumni SMA Islam Al-Mizan</title>
-<meta name="description" content="Formulir pendaftaran Reuni Akbar Alumni SMA Islam Al-Mizan Jatiwangi.">
-<meta property="og:title" content="Daftar Reuni Akbar Alumni SMA Islam Al-Mizan">
+<title>Pendaftaran Reuni Akbar Alumni SMA Unggulan Al-Mizan</title>
+<meta name="description" content="Formulir pendaftaran Reuni Akbar Alumni SMA Unggulan Al-Mizan (semua angkatan).">
+<meta property="og:title" content="Daftar Reuni Akbar Alumni SMA Unggulan Al-Mizan">
 <meta property="og:description" content="Mari berkumpul kembali. Daftarkan diri Anda sekarang.">
 <style>
 :root{--g9:#0f3d2e;--g7:#1b5e46;--g5:#2f8f6b;--g1:#e7f4ee;--gold:#c8962e;--ink:#1d2b26;--mut:#5d6f67;--line:#d5e3dc;--err:#b3261e;--bg:#f6faf8}
@@ -64,7 +64,7 @@ button.primary:disabled{opacity:.6;cursor:wait}
 <header>
   <div class="school" id="sekolah"></div>
   <h1 id="judul">Reuni Akbar Alumni</h1>
-  <p class="sub">Silaturahmi lintas angkatan. Daftarkan diri Anda dan kabari rekan seangkatan.</p>
+  <p class="sub">Silaturahmi semua angkatan. Daftarkan diri Anda dan kabari rekan seangkatan.</p>
   <div class="info" id="info"></div>
 </header>
 
@@ -77,35 +77,51 @@ button.primary:disabled{opacity:.6;cursor:wait}
 
       <fieldset>
         <legend>Data Alumni</legend>
-        <div class="field"><label for="nama">Nama lengkap <span class="req">*</span></label>
+        <div class="field"><label for="nama">Nama lengkap (sesuai KTP/ijazah SMA) <span class="req">*</span></label>
           <input id="nama" name="nama" required maxlength="80" autocomplete="name">
           <div class="err">Nama lengkap wajib diisi.</div></div>
         <div class="row">
-          <div class="field"><label for="panggilan">Nama panggilan (untuk name tag)</label>
-            <input id="panggilan" name="panggilan" maxlength="30"></div>
-          <div class="field"><label for="angkatan">Tahun lulus <span class="req">*</span></label>
-            <select id="angkatan" name="angkatan" required><option value="">Pilih tahun</option></select>
-            <div class="err">Pilih tahun lulus.</div></div>
+          <div class="field"><label for="panggilan">Nama panggilan (untuk name tag) <span class="req">*</span></label>
+            <input id="panggilan" name="panggilan" required maxlength="30">
+            <div class="err">Nama panggilan wajib diisi.</div></div>
+          <div class="field"><label for="angkatan">Alumni angkatan tahun <span class="req">*</span></label>
+            <select id="angkatan" name="angkatan" required><option value="">Pilih tahun lulus</option></select>
+            <div class="err">Pilih tahun angkatan.</div></div>
         </div>
         <div class="row">
-          <div class="field"><label for="wa">Nomor WhatsApp <span class="req">*</span></label>
-            <input id="wa" name="wa" type="tel" inputmode="tel" required maxlength="20" placeholder="08xxxxxxxxxx" autocomplete="tel">
-            <div class="err">Masukkan nomor WhatsApp yang valid.</div></div>
-          <div class="field"><label for="email">Email</label>
-            <input id="email" name="email" type="email" maxlength="80" autocomplete="email">
-            <div class="err">Format email tidak valid.</div></div>
+          <div class="field"><label for="tempatLahir">Tempat lahir <span class="req">*</span></label>
+            <input id="tempatLahir" name="tempatLahir" required maxlength="60">
+            <div class="err">Tempat lahir wajib diisi.</div></div>
+          <div class="field"><label for="tglLahir">Tanggal lahir <span class="req">*</span></label>
+            <input id="tglLahir" name="tglLahir" type="date" required min="1940-01-01">
+            <div class="err">Isi tanggal lahir yang valid.</div></div>
         </div>
-        <div class="row">
-          <div class="field"><label for="domisili">Kota domisili <span class="req">*</span></label>
-            <input id="domisili" name="domisili" required maxlength="60">
-            <div class="err">Kota domisili wajib diisi.</div></div>
-          <div class="field"><label for="pekerjaan">Pekerjaan / instansi</label>
-            <input id="pekerjaan" name="pekerjaan" maxlength="80"></div>
-        </div>
+        <div class="field"><label for="alamat">Alamat lengkap <span class="req">*</span></label>
+          <textarea id="alamat" name="alamat" rows="3" required maxlength="250" autocomplete="street-address" placeholder="Jalan, RT/RW, desa/kelurahan, kecamatan, kabupaten/kota, provinsi"></textarea>
+          <div class="err">Alamat lengkap wajib diisi.</div></div>
       </fieldset>
 
       <fieldset>
-        <legend>Kehadiran</legend>
+        <legend>Kontak dan Profesi</legend>
+        <div class="row">
+          <div class="field"><label for="wa">No. HP (WhatsApp) <span class="req">*</span></label>
+            <input id="wa" name="wa" type="tel" inputmode="tel" required maxlength="20" placeholder="08xxxxxxxxxx" autocomplete="tel">
+            <div class="err">Masukkan nomor HP/WhatsApp yang valid.</div></div>
+          <div class="field"><label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" required maxlength="80" autocomplete="email">
+            <div class="err">Masukkan email yang valid.</div></div>
+        </div>
+        <div class="field"><label for="medsos">Akun media sosial <span class="req">*</span></label>
+          <input id="medsos" name="medsos" required maxlength="120" placeholder="Contoh: IG @namaanda, FB Nama Anda, TikTok @namaanda">
+          <div class="hint">Boleh diisi lebih dari satu akun.</div>
+          <div class="err">Akun media sosial wajib diisi.</div></div>
+        <div class="field"><label for="profesi">Profesi <span class="req">*</span></label>
+          <input id="profesi" name="profesi" required maxlength="100" placeholder="Contoh: Guru, wiraswasta, dokter (sebutkan instansi bila ada)">
+          <div class="err">Profesi wajib diisi.</div></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Kehadiran dan Harapan</legend>
         <div class="row">
           <div class="field"><label for="jumlah">Jumlah peserta yang hadir <span class="req">*</span></label>
             <select id="jumlah" name="jumlah" required>
@@ -113,14 +129,16 @@ button.primary:disabled{opacity:.6;cursor:wait}
               <option value="4">4</option><option value="5">5</option><option value="6">6</option>
             </select>
             <div class="hint">Termasuk pasangan dan anak yang ikut.</div></div>
-          <div class="field"><label for="kaos">Ukuran kaos</label>
-            <select id="kaos" name="kaos"><option value="">Tidak memesan</option>
-              <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>3XL</option></select></div>
+          <div class="field"><label for="kaos">Ukuran kaos <span class="req">*</span></label>
+            <select id="kaos" name="kaos" required><option value="">Pilih ukuran</option>
+              <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option><option>3XL</option></select>
+            <div class="err">Pilih ukuran kaos.</div></div>
         </div>
-        <div class="field"><label for="pesan">Pesan atau kenangan untuk teman-teman (opsional)</label>
-          <textarea id="pesan" name="pesan" rows="3" maxlength="500"></textarea></div>
-        <label class="check"><input type="checkbox" id="panitia" name="panitia"> <span>Saya bersedia membantu sebagai panitia atau relawan.</span></label>
-        <label class="check"><input type="checkbox" id="sponsor" name="sponsor"> <span>Saya bersedia dihubungi terkait dukungan atau donasi acara.</span></label>
+        <div class="field"><label for="harapan">Harapan untuk reuni dan untuk Al-Mizan <span class="req">*</span></label>
+          <textarea id="harapan" name="harapan" rows="4" required maxlength="600" placeholder="Tuliskan harapan Anda"></textarea>
+          <div class="err">Harapan wajib diisi.</div></div>
+        <label class="check"><input type="checkbox" id="panitia" name="panitia"> <span>Saya bersedia membantu sebagai panitia atau relawan. (centang bila bersedia)</span></label>
+        <label class="check"><input type="checkbox" id="sponsor" name="sponsor"> <span>Saya bersedia dihubungi terkait dukungan atau donasi acara. (centang bila bersedia)</span></label>
       </fieldset>
 
       <div class="hp" aria-hidden="true"><label>Jangan diisi <input name="website" tabindex="-1" autocomplete="off"></label></div>

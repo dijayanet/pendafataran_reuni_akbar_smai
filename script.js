@@ -54,17 +54,21 @@
   // ---- Validasi ----
   function validate() {
     var ok = true;
-    ["nama", "angkatan", "domisili"].forEach(function (id) {
+    ["nama", "panggilan", "angkatan", "tempatLahir", "alamat", "medsos", "profesi", "kaos", "harapan"].forEach(function (id) {
       var bad = !$(id).value.trim();
       setInvalid($(id), bad);
       if (bad) ok = false;
     });
+    var tl = $("tglLahir").value;
+    var tlBad = !tl || tl < "1940-01-01" || tl > new Date().toISOString().slice(0, 10);
+    setInvalid($("tglLahir"), tlBad);
+    if (tlBad) ok = false;
     var wa = normWA($("wa").value);
     var waBad = !/^62\d{8,13}$/.test(wa);
     setInvalid($("wa"), waBad);
     if (waBad) ok = false;
     var em = $("email").value.trim();
-    var emBad = em !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+    var emBad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
     setInvalid($("email"), emBad);
     if (emBad) ok = false;
     var sBad = !$("setuju").checked;
@@ -72,6 +76,17 @@
     if (sBad) ok = false;
     return ok;
   }
+
+  // Hapus tanda galat begitu kolom diperbaiki
+  document.querySelectorAll("#form input, #form select, #form textarea").forEach(function (el) {
+    ["input", "change"].forEach(function (ev) {
+      el.addEventListener(ev, function () {
+        var wrap = el.closest(".field");
+        if (wrap) wrap.classList.remove("invalid");
+        if (el.id === "setuju") $("setujuErr").style.display = "none";
+      });
+    });
+  });
 
   // ---- Kirim ----
   $("form").addEventListener("submit", function (e) {
@@ -92,11 +107,14 @@
       angkatan: $("angkatan").value,
       wa: normWA($("wa").value),
       email: $("email").value.trim(),
-      domisili: $("domisili").value.trim(),
-      pekerjaan: $("pekerjaan").value.trim(),
+      tempatLahir: $("tempatLahir").value.trim(),
+      tglLahir: $("tglLahir").value,
+      alamat: $("alamat").value.trim(),
+      medsos: $("medsos").value.trim(),
+      profesi: $("profesi").value.trim(),
       jumlah: $("jumlah").value,
       kaos: $("kaos").value,
-      pesan: $("pesan").value.trim(),
+      harapan: $("harapan").value.trim(),
       panitia: $("panitia").checked ? "Ya" : "Tidak",
       sponsor: $("sponsor").checked ? "Ya" : "Tidak",
       website: document.querySelector('input[name="website"]').value

@@ -1,4 +1,4 @@
-# Pendaftaran Reuni Akbar Alumni SMA Islam Al-Mizan
+# Pendaftaran Reuni Akbar Alumni SMA Unggulan Al-Mizan (Semua Angkatan)
 
 Situs statis (HTML/CSS/JS) untuk GitHub Pages. Data pendaftar tersimpan di Google Sheets milik Anda melalui Google Apps Script. Semuanya gratis dan tanpa server.
 
@@ -57,10 +57,14 @@ Bagikan tautan itu ke grup alumni. Anda juga dapat memakai domain sendiri lewat 
 
 - Validasi nomor WhatsApp (otomatis diubah ke format 62…) dan email.
 - Kode pendaftaran unik, serta pencegahan pendaftaran ganda berdasarkan nomor WhatsApp.
-- Jumlah peserta, ukuran kaos, kesediaan jadi panitia/donatur, dan persetujuan penggunaan data.
+- Data yang dikumpulkan: nama lengkap (sesuai KTP/ijazah), tempat dan tanggal lahir, alamat lengkap, No. HP/WhatsApp, email, akun medsos, profesi, angkatan, jumlah hadir, ukuran kaos, harapan untuk reuni dan Al-Mizan, serta kesediaan jadi panitia/donatur dan persetujuan penggunaan data.
 - Perlindungan dasar: kolom jebakan bot, kunci antrean saat banyak pendaftar bersamaan, dan penetralan rumus berbahaya di Sheets.
 - Kolom `Status Bayar` di sheet (default "Belum") untuk Anda perbarui manual.
 
 ## Catatan privasi
 
 Data berisi nama dan nomor WhatsApp alumni. Jangan membagikan akses spreadsheet kepada orang yang tidak berkepentingan, dan gunakan data hanya untuk keperluan reuni sesuai persetujuan pada formulir.
+
+## Jika kolom spreadsheet berubah
+
+Bila Anda sempat menjalankan versi lama, hapus tab `Pendaftar` (atau seluruh barisnya) sebelum memakai versi ini agar judul kolom dibuat ulang, lalu **Terapkan → Kelola deployment → versi baru**.
