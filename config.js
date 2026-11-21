@@ -13,5 +13,5 @@ window.REUNI_CONFIG = {
   linkGrupWA: "",                      // tautan grup WhatsApp alumni (opsional, tampil setelah daftar)
   biayaInfo: "",                       // contoh: "Kontribusi Rp100.000 per peserta" (kosongkan bila tidak ada)
   // URL Web App Google Apps Script (lihat README, langkah 2)
-  apiUrl: ""
+  apiUrl: "https://script.google.com/macros/s/AKfycbz2KG_QaBCQUnHSJSh1GSVcq_e7i_na8tzBOjnKb5ubRjA9s7H01ic3M_7NwjrjNBR2Lw/exec"
 };
