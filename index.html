@@ -41,7 +41,13 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(47,143,107,.25);b
 button.primary{width:100%;font:inherit;font-weight:700;background:var(--g7);color:#fff;border:0;border-radius:12px;padding:14px;cursor:pointer;font-size:1.05rem}
 button.primary:hover{background:var(--g9)}
 button.primary:disabled{opacity:.6;cursor:wait}
-.alert{display:none;background:#fdecea;color:var(--err);border:1px solid #f3c1bd;border-radius:10px;padding:12px;margin-bottom:14px}
+.alert{display:none;background:#fdecea;color:var(--err);border:1px solid #f3c1bd;border-radius:10px;padding:12px;margin-bottom:14px;position:sticky;top:8px;z-index:5;max-height:30vh;overflow:auto;box-shadow:0 4px 14px rgba(179,38,30,.15)}
+.alert-title{font-weight:700;margin-bottom:6px}
+.alert-list{display:flex;flex-wrap:wrap;gap:6px}
+.alert-list button{font:inherit;font-size:.88rem;font-weight:600;color:var(--err);background:#fff;border:1px solid #f3c1bd;border-radius:999px;padding:4px 12px;cursor:pointer}
+.alert-list button:hover{background:var(--err);color:#fff}
+.flash{animation:flash 1.4s ease-out}
+@keyframes flash{0%,40%{box-shadow:0 0 0 4px rgba(179,38,30,.35);border-radius:10px}100%{box-shadow:0 0 0 0 rgba(179,38,30,0)}}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .success{display:none;text-align:center}
 .success .tick{width:64px;height:64px;border-radius:50%;background:var(--g1);color:var(--g5);font-size:2rem;display:grid;place-items:center;margin:0 auto 10px}

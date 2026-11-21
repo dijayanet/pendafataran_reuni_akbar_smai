@@ -47,34 +47,71 @@
   }
   function showAlert(msg) {
     var a = $("alert");
+    a.innerHTML = "";
     a.textContent = msg;
     a.style.display = msg ? "block" : "none";
   }
 
   // ---- Validasi ----
-  function validate() {
-    var ok = true;
-    ["nama", "panggilan", "angkatan", "tempatLahir", "alamat", "medsos", "profesi", "kaos", "harapan"].forEach(function (id) {
-      var bad = !$(id).value.trim();
-      setInvalid($(id), bad);
-      if (bad) ok = false;
+  var LABEL_NAMA = { wa: "No. HP (WhatsApp)", tglLahir: "Tanggal lahir", setuju: "Persetujuan penggunaan data" };
+  function labelOf(id) {
+    if (LABEL_NAMA[id]) return LABEL_NAMA[id];
+    var l = document.querySelector('label[for="' + id + '"]');
+    return l ? l.textContent.replace(/\*/g, "").replace(/\(.*?\)/g, "").replace(/\s+/g, " ").trim() : id;
+  }
+
+  // Gulir ke kolom, beri sorotan, dan fokus
+  function goTo(id) {
+    var el = $(id);
+    if (!el) return;
+    var box = el.closest(".field") || el.closest(".check") || el;
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+    box.classList.remove("flash");
+    void box.offsetWidth;
+    box.classList.add("flash");
+    setTimeout(function () { try { el.focus({ preventScroll: true }); } catch (x) { el.focus(); } }, 350);
+  }
+
+  // Tampilkan daftar kolom bermasalah, setiap item bisa diklik untuk menuju kolomnya
+  function showProblems(ids, intro) {
+    var a = $("alert");
+    a.innerHTML = "";
+    var p = document.createElement("div");
+    p.className = "alert-title";
+    p.textContent = intro;
+    a.appendChild(p);
+    var ul = document.createElement("div");
+    ul.className = "alert-list";
+    ids.forEach(function (id) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = "→ " + labelOf(id);
+      b.addEventListener("click", function () { goTo(id); });
+      ul.appendChild(b);
     });
-    var tl = $("tglLahir").value;
-    var tlBad = !tl || tl < "1940-01-01" || tl > new Date().toISOString().slice(0, 10);
-    setInvalid($("tglLahir"), tlBad);
-    if (tlBad) ok = false;
-    var wa = normWA($("wa").value);
-    var waBad = !/^62\d{8,13}$/.test(wa);
-    setInvalid($("wa"), waBad);
-    if (waBad) ok = false;
-    var em = $("email").value.trim();
-    var emBad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
-    setInvalid($("email"), emBad);
-    if (emBad) ok = false;
+    a.appendChild(ul);
+    a.style.display = "block";
+  }
+
+  // Mengembalikan daftar id kolom yang belum benar (kosong = semua benar)
+  function validate() {
+    var bad = [];
+    function check(id, isBad) {
+      setInvalid($(id), isBad);
+      if (isBad) bad.push(id);
+    }
+    ["nama", "panggilan", "angkatan", "tempatLahir", "tglLahir", "alamat", "wa", "email", "medsos", "profesi", "kaos", "harapan"].forEach(function (id) {
+      var v = $(id).value.trim();
+      var isBad = !v;
+      if (!isBad && id === "tglLahir") isBad = v < "1940-01-01" || v > new Date().toISOString().slice(0, 10);
+      if (!isBad && id === "wa") isBad = !/^62\d{8,13}$/.test(normWA(v));
+      if (!isBad && id === "email") isBad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      check(id, isBad);
+    });
     var sBad = !$("setuju").checked;
     $("setujuErr").style.display = sBad ? "block" : "none";
-    if (sBad) ok = false;
-    return ok;
+    if (sBad) bad.push("setuju");
+    return bad;
   }
 
   // Hapus tanda galat begitu kolom diperbaiki
@@ -92,9 +129,10 @@
   $("form").addEventListener("submit", function (e) {
     e.preventDefault();
     showAlert("");
-    if (!validate()) {
-      var first = document.querySelector(".invalid input,.invalid select");
-      if (first) first.focus();
+    var bad = validate();
+    if (bad.length) {
+      showProblems(bad, bad.length + " isian perlu dilengkapi atau diperbaiki. Klik untuk menuju kolomnya:");
+      goTo(bad[0]);
       return;
     }
     if (!C.apiUrl) {
@@ -130,13 +168,26 @@
     })
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        if (!d || !d.ok) throw new Error((d && d.error) || "Gagal menyimpan data.");
+        if (!d || !d.ok) {
+          var e = new Error((d && d.error) || "Gagal menyimpan data.");
+          e.field = d && d.field;
+          throw e;
+        }
         tampilSukses(payload, d.kode);
       })
       .catch(function (err) {
-        showAlert(err.message === "Failed to fetch"
-          ? "Koneksi bermasalah. Periksa internet Anda lalu coba lagi."
-          : err.message);
+        if (err.field && $(err.field)) {
+          setInvalid($(err.field), true);
+          showProblems([err.field], err.message);
+          goTo(err.field);
+        } else if (err.message === "Data wajib belum lengkap.") {
+          // Pesan dari Apps Script versi lama
+          showAlert("Semua isian sudah terisi, tetapi server pendaftaran masih memakai versi lama. Panitia perlu menempel ulang Code.gs terbaru dan membuat versi deployment baru (lihat README).");
+        } else {
+          showAlert(err.message === "Failed to fetch"
+            ? "Koneksi bermasalah. Periksa internet Anda lalu coba lagi."
+            : err.message);
+        }
         btn.disabled = false;
         btn.textContent = "Daftar Sekarang";
       });
