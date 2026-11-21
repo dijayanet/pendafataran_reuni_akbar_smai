@@ -1,6 +1,6 @@
 // ====== PENGATURAN ACARA — ubah bagian ini saja ======
 window.REUNI_CONFIG = {
-  namaAcara: "Reuni Akbar Alumni SMA Islam Al-Mizan",
+  namaAcara: "Reuni Akbar Alumni SMA Unggulan Al-Mizan (Semua Angkatan)",
   sekolah: "SMA Islam Al-Mizan Jatiwangi",
   tanggal: "ISI TANGGAL ACARA",        // contoh: "Minggu, 20 Desember 2026"
   waktu: "ISI JAM ACARA",              // contoh: "08.00 WIB – selesai"
@@ -11,7 +11,7 @@ window.REUNI_CONFIG = {
   kontakPanitiaNama: "Panitia Reuni",
   kontakPanitiaWA: "",                 // format 628xxxxxxxxxx, contoh: "6281234567890"
   linkGrupWA: "",                      // tautan grup WhatsApp alumni (opsional, tampil setelah daftar)
-  biayaInfo: "Kontribusi Rp100.000 per peserta",                       // contoh: "Kontribusi Rp100.000 per peserta" (kosongkan bila tidak ada)
+  biayaInfo: "Kontribusi Rp100.000 per peserta",
   // URL Web App Google Apps Script (lihat README, langkah 2)
   apiUrl: "https://script.google.com/macros/s/AKfycbze8uwcThkux-iSYzHquX9dXGodA6jNBpXd2qkLTq4F_FLgYI6bL9MDYMY0kGxE-wAB/exec"
 };
