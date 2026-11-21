@@ -9,6 +9,7 @@ Situs statis (HTML/CSS/JS) untuk GitHub Pages. Data pendaftar tersimpan di Googl
 | `index.html` | Halaman dan formulir pendaftaran |
 | `script.js` | Validasi, pengiriman data, dan halaman sukses |
 | `config.js` | **Satu-satunya berkas yang perlu Anda ubah** (tanggal, tempat, kontak, URL Apps Script) |
+| `kop.png`, `logo.png` | Kop surat dan lambang sekolah (ganti berkas ini bila kop berubah) |
 | `apps-script/Code.gs` | Kode backend yang ditempel ke Google Apps Script |
 
 ## Langkah 1 — Siapkan Google Sheets dan Apps Script

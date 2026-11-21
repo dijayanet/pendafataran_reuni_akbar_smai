@@ -15,9 +15,8 @@
     s.textContent = x[0] + " " + x[1];
     info.appendChild(s);
   });
-  var foot = "© " + new Date().getFullYear() + " Panitia " + (C.namaAcara || "Reuni");
-  if (C.batasDaftar) foot = "Batas pendaftaran: " + C.batasDaftar + ". " + foot;
-  $("footer").textContent = foot;
+  $("tahun").textContent = new Date().getFullYear();
+  if (C.batasDaftar) $("batas").textContent = "Batas pendaftaran: " + C.batasDaftar;
 
   // Pilihan tahun lulus (terbaru di atas)
   var sel = $("angkatan");
